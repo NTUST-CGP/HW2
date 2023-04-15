@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 //    _winMenu = 4
 //    _loseMenu = 5
     public bool _useJoystick = false;
+    public bool _useArrow = true;
     public void ChangeMenu(int index)
     {
         for(int i = 0; i < _menu.Length; i++)
