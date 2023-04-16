@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rb;
@@ -13,21 +14,16 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
     
     //charater
-    private float _blood = 100f;
-    private bool _isShadowPlayer;
-    [SerializeField] private bool _isShadow = true; // is Shadow or Light
-    [SerializeField] private bool _isGun = false; // use gun or blade
-
-
+    public PlayerData _playerData;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _isShadowPlayer = _uiManager._isShadowPlayer;
+        _playerData.isShadowPlayer = _uiManager._isShadowPlayer;
     }
     private void Update()
     {
         //dead
-        if(_blood <= 0f)
+        if(_playerData.blood <= 0f)
         {
             //TODO: effect
             
@@ -56,7 +52,7 @@ public class PlayerController : MonoBehaviour
         // ShadowPlayer / WeaponPlayer Switch Element / Weapon
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            if(_isShadowPlayer)
+            if(_playerData.isShadowPlayer)
             {
                 SwitchElement();
             }
@@ -68,9 +64,9 @@ public class PlayerController : MonoBehaviour
         // WeaponPlayer Attack
         if(Input.GetKeyDown(KeyCode.F))
         {
-            if(!_isShadowPlayer)
+            if(!_playerData.isShadowPlayer)
             {
-                if(_isGun)
+                if(_playerData.isGun)
                 {
                     //TODO: use gun to attack
                 }
@@ -80,6 +76,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        //test save data
+        // if(Input.GetKeyDown(KeyCode.K))
+        //     _uiManager.SaveData();
+        // if(Input.GetKeyDown(KeyCode.X))
+        //     _uiManager.LoadData();
     }
     private void FixedUpdate()
     {
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.tag == "ShadowItem")
         {
-            if(_isShadowPlayer)
+            if(_playerData.isShadowPlayer)
             {
                 //TODO: can see all of element ground
             }
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.tag == "WeaponItem")
         {
-            if(!_isShadowPlayer)
+            if(!_playerData.isShadowPlayer)
             {
                 //TODO: Buff
             }
@@ -119,11 +120,18 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             float damage = 25f;
-            _blood = Mathf.Clamp(_blood - damage, 0f, 100f); 
+            _playerData.blood = Mathf.Clamp(_playerData.blood - damage, 0f, 100f); 
             //TODO: blood bar fill change
 
             //TODO: injure effect
         }
+
+        // //save data
+        // if(other.gameObject.tag == "SavePoint")
+        // {
+        //     SaveData();
+        //     //TODO: show the information of savedata
+        // }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -144,7 +152,7 @@ public class PlayerController : MonoBehaviour
                 string currentScene = SceneManager.GetActiveScene().name;
                 if(name == "level_1")
                 {
-                    if(_isShadowPlayer)
+                    if(_playerData.isShadowPlayer)
                         _uiManager.LoadScene(2);
                     else
                         _uiManager.LoadScene(3);
@@ -174,28 +182,36 @@ public class PlayerController : MonoBehaviour
     }
     private void SwitchElement()
     {
-        if(_isShadow)
+        if(_playerData.isShadow)
         {
-            _isShadow = false;
+            _playerData.isShadow = false;
             //TODO: effect
         }
         else
         {
-            _isShadow = true;
+            _playerData.isShadow = true;
             //TODO: effect
         }
     }
     private void SwitchWeapon()
     {
-        if(_isGun)
+        if(_playerData.isGun)
         {
-            _isGun = false;
+            _playerData.isGun = false;
             //TODO: animation
         }
         else
         {
-            _isGun = true;
+            _playerData.isGun = true;
             //TODO: animation
         }
+    }
+    [System.Serializable]
+    public class PlayerData
+    {
+        public float blood;
+        public bool isShadowPlayer; // is ShadowPlayer or WeaponPlayer
+        public bool isShadow; // is Shadow or Light
+        public bool isGun; // use gun or blade
     }
 }

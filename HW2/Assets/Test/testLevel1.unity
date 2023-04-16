@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4248792f7f323f045aca2a27e50bca6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerController: {fileID: 1243560064}
   _menu: []
   _joystickUI: {fileID: 0}
   _loadingScreen: {fileID: 2030365471}
@@ -656,11 +657,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0fb0f651112fd498b5bae80e8a3264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiManager: {fileID: 0}
+  _uiManager: {fileID: 1041544728}
   _moveSpeed: 3
   _jumpForce: 60
-  _isShadow: 1
-  _isGun: 0
+  _playerData:
+    blood: 100
+    isShadowPlayer: 0
+    isShadow: 0
+    isGun: 0
 --- !u!70 &1243560065
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

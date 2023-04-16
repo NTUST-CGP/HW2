@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.IO;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -11,6 +14,7 @@ public class UIManager : MonoBehaviour
 //    [SerializeField] private GameObject _exitMenu;
 //    [SerializeField] private GameObject _winMenu;
 //    [SerializeField] private GameObject _loseMenu;
+    [SerializeField] private PlayerController _playerController;
     [SerializeField] private GameObject[] _menu;
     [SerializeField] private GameObject _joystickUI;
     [SerializeField] private GameObject _loadingScreen;
@@ -24,6 +28,7 @@ public class UIManager : MonoBehaviour
     public bool _useJoystick = false;
     public bool _useArrow = true;
     public bool _isShadowPlayer = true;
+
     public void ChangeMenu(int index)
     {
         for(int i = 0; i < _menu.Length; i++)
@@ -71,4 +76,21 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
     }
+    public void SaveData()
+    {
+        XmlSerializer xmlPlayerData = new XmlSerializer(_playerController._playerData.GetType());
+        Stream s = File.Open(Application.dataPath + "/PlayerData.xml", FileMode.Create);
+        xmlPlayerData.Serialize(s, _playerController._playerData);
+        s.Close();
+    }
+
+    public void LoadData()
+    {
+        XmlSerializer xmlPlayerData = new XmlSerializer(_playerController._playerData.GetType());
+        Stream s = File.Open(Application.dataPath + "/PlayerData.xml", FileMode.Open);
+        _playerController._playerData = (PlayerController.PlayerData)xmlPlayerData.Deserialize(s);
+        s.Close();
+    }
+   
+    
 }
