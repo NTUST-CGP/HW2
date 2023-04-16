@@ -333,8 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6225b74738a1aa54c96cd22514cafef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingScreen: {fileID: 2030365471}
-  _loadingBarFill: {fileID: 1858691949}
+  _uiManager: {fileID: 0}
 --- !u!114 &1041544728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,8 +348,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menu: []
   _joystickUI: {fileID: 0}
+  _loadingScreen: {fileID: 2030365471}
+  _loadingBarFill: {fileID: 1858691949}
   _useJoystick: 0
   _useArrow: 1
+  _isShadowPlayer: 1
 --- !u!4 &1041544729
 Transform:
   m_ObjectHideFlags: 0
@@ -475,7 +477,8 @@ GameObject:
   - component: {fileID: 1243560059}
   - component: {fileID: 1243560058}
   - component: {fileID: 1243560063}
-  - component: {fileID: 1243560062}
+  - component: {fileID: 1243560065}
+  - component: {fileID: 1243560064}
   m_Layer: 0
   m_Name: WeaponPlayer
   m_TagString: Player
@@ -615,22 +618,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1243560062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243560057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e9ca53aac53c844be4a8400d3bc1da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiManager: {fileID: 1041544728}
-  _moveSpeed: 3
-  _jumpForce: 30
-  _isJumping: 0
 --- !u!61 &1243560063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -657,6 +644,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1363897, y: 0.03}
   m_EdgeRadius: 0
+--- !u!114 &1243560064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243560057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0fb0f651112fd498b5bae80e8a3264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiManager: {fileID: 0}
+  _moveSpeed: 3
+  _jumpForce: 60
+  _isShadow: 1
+  _isGun: 0
+--- !u!70 &1243560065
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243560057}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.5101266, y: -0.05148077}
+  m_Size: {x: 0.48575974, y: 1.5377526}
+  m_Direction: 0
 --- !u!1 &1420041424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,12 +1049,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f970610f30d507d4b8ea2fabdf10630b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b68f2035a0fed234b8827c782f865bc2, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
