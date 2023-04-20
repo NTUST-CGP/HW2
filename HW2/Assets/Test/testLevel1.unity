@@ -941,12 +941,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6e16bd5427f034292bf6f2d7274633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1243560057}
   _points:
   - {fileID: 501024948}
   - {fileID: 1031454658}
   _nextID: 1
   _IDChangeValue: 1
   _speed: 2
+  _attckDistance: 2
+  _timeBetweenAttack: 3
 --- !u!61 &1304576780
 BoxCollider2D:
   m_ObjectHideFlags: 0
