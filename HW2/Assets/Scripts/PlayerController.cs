@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -76,11 +77,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        //test save data
-        // if(Input.GetKeyDown(KeyCode.K))
-        //     _uiManager.SaveData();
-        // if(Input.GetKeyDown(KeyCode.X))
-        //     _uiManager.LoadData();
+        //TEST: save data
+        if(Input.GetKeyDown(KeyCode.K))
+            _uiManager.SaveData();
+        if(Input.GetKeyDown(KeyCode.X))
+            _uiManager.LoadData();
     }
     private void FixedUpdate()
     {
@@ -213,5 +214,6 @@ public class PlayerController : MonoBehaviour
         public bool isShadowPlayer; // is ShadowPlayer or WeaponPlayer
         public bool isShadow; // is Shadow or Light
         public bool isGun; // use gun or blade
+        public List<float> playerTransform = new List<float>();
     }
 }

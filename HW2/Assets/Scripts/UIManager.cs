@@ -78,6 +78,11 @@ public class UIManager : MonoBehaviour
     }
     public void SaveData()
     {
+        _playerController._playerData.playerTransform.Add(_playerController.gameObject.transform.position.x);
+        _playerController._playerData.playerTransform.Add(_playerController.gameObject.transform.position.y);
+        // _playerController._playerData.playerTransform.Add(_playerController.gameObject.transform.rotation.x);
+        // _playerController._playerData.playerTransform.Add(_playerController.gameObject.transform.rotation.y);
+        // _playerController._playerData.playerTransform.Add(_playerController.gameObject.transform.rotation.z);
         XmlSerializer xmlPlayerData = new XmlSerializer(_playerController._playerData.GetType());
         Stream s = File.Open(Application.dataPath + "/PlayerData.xml", FileMode.Create);
         xmlPlayerData.Serialize(s, _playerController._playerData);
@@ -89,8 +94,10 @@ public class UIManager : MonoBehaviour
         XmlSerializer xmlPlayerData = new XmlSerializer(_playerController._playerData.GetType());
         Stream s = File.Open(Application.dataPath + "/PlayerData.xml", FileMode.Open);
         _playerController._playerData = (PlayerController.PlayerData)xmlPlayerData.Deserialize(s);
+        _playerController.transform.position = new Vector3(_playerController._playerData.playerTransform[0], _playerController._playerData.playerTransform[1], _playerController.gameObject.transform.position.z);
         s.Close();
     }
+    
    
     
 }

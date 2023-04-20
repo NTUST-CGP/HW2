@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <PlayerData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <blood>100</blood>
+  <blood>50</blood>
   <isShadowPlayer>true</isShadowPlayer>
   <isShadow>false</isShadow>
   <isGun>false</isGun>
+  <playerTransform>
+    <float>0.2505948</float>
+    <float>-2.70093155</float>
+    <float>0.2505948</float>
+    <float>-2.70093155</float>
+    <float>0.2505948</float>
+    <float>-2.70093155</float>
+  </playerTransform>
 </PlayerData>
