@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rb;
+    [SerializeField] private Joystick _joystick;
+    [SerializeField] private Vector3 _dir;
+
     [SerializeField] private UIManager _uiManager;
     
     //move
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if(_uiManager._useJoystick) 
         {
             //TODO: use joystick to move
+            _dir = _joystick.InputDirection;
         }
 
         // ShadowPlayer / WeaponPlayer Switch Element / Weapon
@@ -82,10 +86,13 @@ public class PlayerController : MonoBehaviour
             _uiManager.SaveData();
         if(Input.GetKeyDown(KeyCode.X))
             _uiManager.LoadData();
+        
     }
     private void FixedUpdate()
     {
         if(_moveHorizontal != 0 || _jump) Move();
+        if(_dir.magnitude > 0) Move();
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -180,6 +187,9 @@ public class PlayerController : MonoBehaviour
         {
             _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
         }
+        if(_dir.magnitude > 0 )
+            _rb.AddForce(new Vector2(_dir.x * _moveSpeed, 0f), ForceMode2D.Impulse);
+        
     }
     private void SwitchElement()
     {
