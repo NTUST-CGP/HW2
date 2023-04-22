@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,24 +17,25 @@ public class UIManager : MonoBehaviour
 //    [SerializeField] private GameObject _loseMenu;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private GameObject[] _menu;
+    [SerializeField] private GameObject _checkText;
     [SerializeField] private GameObject _joystickUI;
     [SerializeField] private GameObject _loadingScreen;
     [SerializeField] private Image _loadingBarFill;
 //    _startMenu = 0
 //    _settingMenu = 1
-//    _saveMenu = 2
-//    _exitMenu = 3
+//    _saveMenu = 3
+//    _checkMenu = 2
 //    _winMenu = 4
 //    _loseMenu = 5
     public bool _useJoystick = false;
     public bool _useArrow = true;
     public bool _isShadowPlayer = true;
 
-    public void ChangeMenu(int index)
+    public void ChangeMenu(int targetID)
     {
         for(int i = 0; i < _menu.Length; i++)
         {
-            if(i == index)
+            if(i == targetID)
                 _menu[i].SetActive(true);
             else   
                 _menu[i].SetActive(false);
@@ -98,6 +100,15 @@ public class UIManager : MonoBehaviour
         s.Close();
     }
     
+    public void CheckMenu(string info)
+    {
+        _checkText.GetComponent<TMP_Text>().text = info;
+        _menu[2].SetActive(true);
+    }
+    public void Cancel()
+    {
+        _menu[2].SetActive(false);
+    }
    
     
 }
